@@ -1,0 +1,24 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 2450BM14G
+D Sub-GHz Impedance Matched Balun + LPF integrated Passive
+K Sub-GHz Balun
+F https://www.johansontechnology.com/datasheets/0850BM14E0016/0850BM14E0016.pdf
+$ENDCMP
+#
+$CMP CC2652R1FRGZR
+D CC2652R1FRGZR
+F http://www.ti.com/lit/ds/symlink/cc2652r.pdf
+$ENDCMP
+#
+$CMP VDDR
+D Power symbol creates a global label with name "VCC"
+K power-flag
+$ENDCMP
+#
+$CMP VDDS
+D Power symbol creates a global label with name "VCC"
+K power-flag
+$ENDCMP
+#
+#End Doc Library

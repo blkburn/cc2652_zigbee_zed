@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name cc2652_ti)(type Legacy)(uri ${KIPRJMOD}/cc2652_ti.lib)(options "")(descr ""))
+  (lib (name cc2652_module_rf_star)(type Legacy)(uri /home/craig/ti/github_repo/hardware/libs/cc2652_module_rf_star.lib)(options "")(descr ""))
+)

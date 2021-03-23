@@ -1,0 +1,483 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Connector_Generic_Conn_01x04
+#
+DEF Connector_Generic_Conn_01x04 J 0 40 Y N 1 F N
+F0 "J" 0 200 50 H V C CNN
+F1 "Connector_Generic_Conn_01x04" 0 -300 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -195 0 -205 1 1 6 N
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 150 50 -250 1 1 10 f
+X Pin_1 1 -200 100 150 R 50 50 1 1 P
+X Pin_2 2 -200 0 150 R 50 50 1 1 P
+X Pin_3 3 -200 -100 150 R 50 50 1 1 P
+X Pin_4 4 -200 -200 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Generic_Conn_02x05_Odd_Even
+#
+DEF Connector_Generic_Conn_02x05_Odd_Even J 0 40 Y N 1 F N
+F0 "J" 50 300 50 H V C CNN
+F1 "Connector_Generic_Conn_02x05_Odd_Even" 50 -300 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_2x??_*
+$ENDFPLIST
+DRAW
+S -50 -195 0 -205 1 1 6 N
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 105 0 95 1 1 6 N
+S -50 205 0 195 1 1 6 N
+S -50 250 150 -250 1 1 10 f
+S 150 -195 100 -205 1 1 6 N
+S 150 -95 100 -105 1 1 6 N
+S 150 5 100 -5 1 1 6 N
+S 150 105 100 95 1 1 6 N
+S 150 205 100 195 1 1 6 N
+X Pin_1 1 -200 200 150 R 50 50 1 1 P
+X Pin_10 10 300 -200 150 L 50 50 1 1 P
+X Pin_2 2 300 200 150 L 50 50 1 1 P
+X Pin_3 3 -200 100 150 R 50 50 1 1 P
+X Pin_4 4 300 100 150 L 50 50 1 1 P
+X Pin_5 5 -200 0 150 R 50 50 1 1 P
+X Pin_6 6 300 0 150 L 50 50 1 1 P
+X Pin_7 7 -200 -100 150 R 50 50 1 1 P
+X Pin_8 8 300 -100 150 L 50 50 1 1 P
+X Pin_9 9 -200 -200 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_Antenna_Dipole
+#
+DEF Device_Antenna_Dipole AE 0 40 N N 1 F N
+F0 "AE" 50 50 50 H V C CNN
+F1 "Device_Antenna_Dipole" 50 0 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 8 0 1 10 100 -150 100 -100 200 -100 200 -50 -100 -50 -100 -100 0 -100 0 -150 N
+X ~ 1 0 -200 100 U 50 50 1 1 I
+X ~ 2 100 -200 100 U 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# Device_Crystal
+#
+DEF Device_Crystal Y 0 40 N N 1 F N
+F0 "Y" 0 150 50 H V C CNN
+F1 "Device_Crystal" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Crystal*
+$ENDFPLIST
+DRAW
+S -45 100 45 -100 0 1 12 N
+P 2 0 1 0 -100 0 -75 0 N
+P 2 0 1 20 -75 -50 -75 50 N
+P 2 0 1 20 75 -50 75 50 N
+P 2 0 1 0 100 0 75 0 N
+X 1 1 -150 0 50 R 50 50 1 1 P
+X 2 2 150 0 50 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_Crystal_GND24
+#
+DEF Device_Crystal_GND24 Y 0 40 Y N 1 F N
+F0 "Y" 125 200 50 H V L CNN
+F1 "Device_Crystal_GND24" 125 125 50 H V L CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Crystal*
+$ENDFPLIST
+DRAW
+S -45 100 45 -100 0 1 12 N
+P 2 0 1 0 -100 0 -80 0 N
+P 2 0 1 20 -80 -50 -80 50 N
+P 2 0 1 0 0 -150 0 -140 N
+P 2 0 1 0 0 140 0 150 N
+P 2 0 1 20 80 -50 80 50 N
+P 2 0 1 0 80 0 100 0 N
+P 4 0 1 0 -100 -90 -100 -140 100 -140 100 -90 N
+P 4 0 1 0 -100 90 -100 140 100 140 100 90 N
+X 1 1 -150 0 50 R 50 50 1 1 P
+X 2 2 0 200 50 D 50 50 1 1 P
+X 3 3 150 0 50 L 50 50 1 1 P
+X 4 4 0 -200 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_L
+#
+DEF Device_L L 0 40 N N 1 F N
+F0 "L" -50 0 50 V V C CNN
+F1 "Device_L" 75 0 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Choke_*
+ *Coil*
+ Inductor_*
+ L_*
+$ENDFPLIST
+DRAW
+A 0 -75 25 -899 899 0 1 0 N 0 -100 0 -50
+A 0 -25 25 -899 899 0 1 0 N 0 -50 0 0
+A 0 25 25 -899 899 0 1 0 N 0 0 0 50
+A 0 75 25 -899 899 0 1 0 N 0 50 0 100
+X 1 1 0 150 50 D 50 50 1 1 P
+X 2 2 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_LED
+#
+DEF Device_LED D 0 40 N N 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "Device_LED" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ LED*
+ LED_SMD:*
+ LED_THT:*
+$ENDFPLIST
+DRAW
+P 2 0 1 10 -50 -50 -50 50 N
+P 2 0 1 0 -50 0 50 0 N
+P 4 0 1 10 50 -50 50 50 -50 0 50 -50 N
+P 5 0 1 0 -120 -30 -180 -90 -150 -90 -180 -90 -180 -60 N
+P 5 0 1 0 -70 -30 -130 -90 -100 -90 -130 -90 -130 -60 N
+X K 1 -150 0 100 R 50 50 1 1 P
+X A 2 150 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_R
+#
+DEF Device_R R 0 0 N Y 1 F N
+F0 "R" 80 0 50 V V C CNN
+F1 "Device_R" 0 0 50 V V C CNN
+F2 "" -70 0 50 V I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
+DRAW
+S -40 -100 40 100 0 1 10 N
+X ~ 1 0 150 50 D 50 50 1 1 P
+X ~ 2 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# cc2652_module_rf_star_BAT-HLD-001
+#
+DEF cc2652_module_rf_star_BAT-HLD-001 BT 0 40 Y Y 1 L N
+F0 "BT" 0 0 50 H V L CNN
+F1 "cc2652_module_rf_star_BAT-HLD-001" 0 100 50 H V L CNN
+F2 "Linx-BAT-HLD-001-*" 0 200 50 H I L CNN
+F3 "https://www.linxtechnologies.com/resources/diagrams/bat-hld-001.pdf" 0 300 50 H I L CNN
+F4 "Batt" 0 400 50 H I L CNN "category"
+F5 "HOLDER BATTERY 20MM COIN" 0 500 50 H I L CNN "digikey description"
+F6 "BAT-HLD-001-ND" 0 600 50 H I L CNN "digikey part number"
+F7 "yes" 0 700 50 H I L CNN "lead free"
+F8 "46b8dec5928a9d45" 0 800 50 H I L CNN "library id"
+F9 "Linx" 0 900 50 H I L CNN "manufacturer"
+F10 "Surface Mount" 0 1000 50 H I L CNN "mounting type"
+F11 "712-BAT-HLD-001" 0 1100 50 H I L CNN "mouser part number"
+F12 "BAT_SMT_21MM1_15MM5" 0 1200 50 H I L CNN "package"
+F13 "yes" 0 1300 50 H I L CNN "rohs"
+DRAW
+T 1 100 -120 60 1 1 0 + Normal 0 C C
+T 0 150 -500 60 1 1 0 - Normal 0 C C
+P 2 1 1 0 50 -400 -50 -400 N
+P 2 1 1 0 50 -260 -50 -260 N
+P 2 1 1 0 100 -330 -100 -330 N
+P 2 1 1 0 100 -200 -100 -200 N
+X CATHODE 1 0 -500 100 U 40 0 1 1 U
+X ANODE 2 0 -100 100 D 40 0 1 1 U
+ENDDRAW
+ENDDEF
+#
+# cc2652_module_rf_star_BLM18HE152SN1D
+#
+DEF cc2652_module_rf_star_BLM18HE152SN1D FB 0 40 Y Y 1 L N
+F0 "FB" 0 200 50 H V L CNN
+F1 "cc2652_module_rf_star_BLM18HE152SN1D" 0 300 50 H V L CNN
+F2 "Murata-BLM18-0.15-t0.8-0-0-*" 0 400 50 H I L CNN
+F3 "https://www.murata.com/en-us/products/productdetail?partno=BLM18HE152SN1%23" 0 500 50 H I L CNN
+F4 "500mA" 0 600 50 H I L CNN "RMS current"
+F5 "No" 0 700 50 H I L CNN "automotive"
+F6 "FBead" 0 900 50 H I L CNN "category"
+F7 "Passive Components" 0 1000 50 H I L CNN "device class L1"
+F8 "EMI / RFI Components" 0 1100 50 H I L CNN "device class L2"
+F9 "Ferrite Beads and Chips" 0 1200 50 H I L CNN "device class L3"
+F10 "0.95mm" 0 1300 50 H I L CNN "height"
+F11 "1500Ω @ 100MHz" 0 1400 50 H I L CNN "impedance at frequency"
+F12 "CAPC16080X80" 0 1500 50 H I L CNN "ipc land pattern name"
+F13 "Yes" 0 1600 50 H I L CNN "lead free"
+F14 "79fe80c99abd3e2a" 0 1700 50 H I L CNN "library id"
+F15 "Murata" 0 1800 50 H I L CNN "manufacturer"
+F16 "0603" 0 1900 50 H I L CNN "package"
+F17 "Yes" 0 2000 50 H I L CNN "rohs"
+F18 "0.5Ω" 0 2100 50 H I L CNN "series resistance"
+F19 "+125℃" 0 2200 50 H I L CNN "temperature range high"
+F20 "-55°C" 0 2300 50 H I L CNN "temperature range low"
+F21 "100MHz" 0 2400 50 H I L CNN "test frequency"
+F22 "25%" 0 2500 50 H I L CNN "tolerance"
+DRAW
+P 2 1 1 0 170 -30 280 80 N
+P 2 1 1 0 220 -80 170 -30 N
+P 2 1 1 0 220 -80 330 30 N
+P 2 1 1 0 280 80 330 30 N
+X 1 1 100 0 100 R 40 0 1 1 P
+X 2 2 400 0 100 L 40 0 1 1 P
+ENDDRAW
+ENDDEF
+#
+# cc2652_module_rf_star_EVQ-P7A01P-switch2
+#
+DEF cc2652_module_rf_star_EVQ-P7A01P-switch2 SW 0 40 Y Y 1 L N
+F0 "SW" 0 0 50 H V L CNN
+F1 "cc2652_module_rf_star_EVQ-P7A01P-switch2" 0 100 50 H V L CNN
+F2 "Panasonic-EVQ-P7A01P-0-0-*" 0 200 50 H I L CNN
+F3 "https://industrial.panasonic.com/cdbs/www-data/pdf/ATK0000/ATK0000C378.pdf" 0 300 50 H I L CNN
+F4 "No" 0 400 50 H I L CNN "automotive"
+F5 "Switch" 0 500 50 H I L CNN "category"
+F6 "50mA" 0 600 50 H I L CNN "contact current rating"
+F7 "500mΩ" 0 700 50 H I L CNN "contact resistance"
+F8 "Electromechanical" 0 800 50 H I L CNN "device class L1"
+F9 "Switches" 0 900 50 H I L CNN "device class L2"
+F10 "Tactile Switches" 0 1000 50 H I L CNN "device class L3"
+F11 "SWITCH TACTILE SPST-NO 0.05A 12V" 0 1100 50 H I L CNN "digikey description"
+F12 "P16763CT-ND" 0 1200 50 H I L CNN "digikey part number"
+F13 "100000Cycles" 0 1300 50 H I L CNN "electromechanical life"
+F14 "1.55mm" 0 1400 50 H I L CNN "height"
+F15 "Yes" 0 1500 50 H I L CNN "lead free"
+F16 "2f293019bba4f771" 0 1600 50 H I L CNN "library id"
+F17 "Panasonic" 0 1700 50 H I L CNN "manufacturer"
+F18 "Surface Mount" 0 1800 50 H I L CNN "mount"
+F19 "SWITCH TACTILE SPST-NO 0.05A 12V" 0 1900 50 H I L CNN "mouser description"
+F20 "667-EVQP7A01P" 0 2000 50 H I L CNN "mouser part number"
+F21 "2.2N" 0 2100 50 H I L CNN "operating force"
+F22 "SMT_SW_3MM5_2MM9" 0 2200 50 H I L CNN "package"
+F23 "Yes" 0 2300 50 H I L CNN "rohs"
+F24 "+70°C" 0 2400 50 H I L CNN "temperature range high"
+F25 "-20°C" 0 2500 50 H I L CNN "temperature range low"
+F26 "SPST-NO" 0 2600 50 H I L CNN "throw configuration"
+F27 "12V" 0 2700 50 H I L CNN "voltage rating DC"
+DRAW
+C 130 -200 20 1 1 0 N
+C 270 -200 20 1 1 0 N
+P 2 1 1 0 0 -200 100 -200 N
+P 2 1 1 0 150 -190 250 -130 N
+P 2 1 1 0 400 -200 300 -200 N
+X 1 1 400 -300 200 U 40 0 1 1 P
+X 1' 1' 400 -100 200 D 40 0 1 1 P
+X 2 2 0 -300 200 U 40 0 1 1 P
+X 2' 2' 0 -100 200 D 40 0 1 1 P
+ENDDRAW
+ENDDEF
+#
+# cc2652_ti_2450BM14G
+#
+DEF cc2652_ti_2450BM14G FL 0 20 Y Y 1 F N
+F0 "FL" -250 -250 50 H V C CNN
+F1 "cc2652_ti_2450BM14G" 0 250 50 H V C CNN
+F2 "RF_Converter:Balun_Johanson_1.6x0.8mm" 0 -700 50 H I C CNN
+F3 "" -950 600 50 H I C CNN
+$FPLIST
+ Balun*Johanson*1.6x0.8mm*
+$ENDFPLIST
+DRAW
+S -300 200 300 -200 0 1 10 f
+X UBP 1 400 100 100 L 50 50 0 0 P
+X NC 2 -400 -100 100 R 50 50 0 0 P
+X RF_N 3 -400 0 100 R 50 50 0 0 P
+X RF_P 4 -400 100 100 R 50 50 0 0 P
+X GND 5 200 -300 100 U 50 50 0 0 P
+X GND 6 50 -300 100 U 50 50 0 0 P
+ENDDRAW
+ENDDEF
+#
+# cc2652_ti_CC2652R1FRGZR
+#
+DEF cc2652_ti_CC2652R1FRGZR U 0 40 Y Y 1 L N
+F0 "U" 0 200 50 H V L CNN
+F1 "cc2652_ti_CC2652R1FRGZR" 0 300 50 H V L CNN
+F2 "Texas_Instruments-CC2652R1FRGZR-*" 0 400 50 H I L CNN
+F3 "http://www.ti.com/lit/ds/symlink/cc2652r.pdf" 0 500 50 H I L CNN
+F4 "No" 0 600 50 H I L CNN "automotive"
+F5 "80MHz" 0 700 50 H I L CNN "bandwidth"
+F6 "IC" 0 800 50 H I L CNN "category"
+F7 "2Mbits/s" 0 900 50 H I L CNN "data rate"
+F8 "Integrated Circuits (ICs)" 0 1000 50 H I L CNN "device class L1"
+F9 "RF Semiconductors and Devices" 0 1100 50 H I L CNN "device class L2"
+F10 "Transceivers" 0 1200 50 H I L CNN "device class L3"
+F11 "RF IC'S + MODULES" 0 1300 50 H I L CNN "digikey description"
+F12 "296-53500-1-ND" 0 1400 50 H I L CNN "digikey part number"
+F13 "1mm" 0 1500 50 H I L CNN "height"
+F14 "I2C,SPI,UART,I2S,Other" 0 1600 50 H I L CNN "interface"
+F15 "QFN50P700X700X100-48" 0 1700 50 H I L CNN "ipc land pattern name"
+F16 "Yes" 0 1800 50 H I L CNN "lead free"
+F17 "345da18e7584d2ec" 0 1900 50 H I L CNN "library id"
+F18 "Texas Instruments" 0 2000 50 H I L CNN "manufacturer"
+F19 "2.48GHz" 0 2100 50 H I L CNN "max frequency"
+F20 "+105°C" 0 2200 50 H I L CNN "max junction temp"
+F21 "3.8V" 0 2300 50 H I L CNN "max supply voltage"
+F22 "1.8V" 0 2400 50 H I L CNN "min supply voltage"
+F23 "MCU 32-Bit CC2652R ARM Cortex M4F RISC 352KB Flash 1.8V to 3.8V 48-Pin VQFN T/R" 0 2500 50 H I L CNN "mouser description"
+F24 "595-CC2652R1FRGZR" 0 2600 50 H I L CNN "mouser part number"
+F25 "8" 0 2700 50 H I L CNN "number of ADC channels"
+F26 "31" 0 2800 50 H I L CNN "number of GPIO"
+F27 "VQFN48" 0 2900 50 H I L CNN "package"
+F28 "6.9mA" 0 3000 50 H I L CNN "receiving current"
+F29 "Yes" 0 3100 50 H I L CNN "rohs"
+F30 "-105dBm" 0 3200 50 H I L CNN "sensitivity"
+F31 "0mm" 0 3300 50 H I L CNN "standoff height"
+F32 "+105°C" 0 3400 50 H I L CNN "temperature range high"
+F33 "-40°C" 0 3500 50 H I L CNN "temperature range low"
+F34 "9.6mA" 0 3600 50 H I L CNN "transmitting current"
+DRAW
+S 200 100 1700 -4000 1 1 0 f
+X RF_P 1 1800 -100 100 L 40 40 1 1 B
+X DIO_5 10 100 -1400 100 R 40 40 1 1 B
+X DIO_6 11 100 -1500 100 R 40 40 1 1 B
+X DIO_7 12 100 -1600 100 R 40 40 1 1 B
+X VDDS2 13 100 -300 100 R 40 40 1 1 W
+X DIO_8 14 100 -1700 100 R 40 40 1 1 B
+X DIO_9 15 100 -1800 100 R 40 40 1 1 B
+X DIO_10 16 100 -1900 100 R 40 40 1 1 B
+X DIO_11 17 100 -2000 100 R 40 40 1 1 B
+X DIO_12 18 100 -2100 100 R 40 40 1 1 B
+X DIO_13 19 100 -2200 100 R 40 40 1 1 B
+X RF_N 2 1800 0 100 L 40 40 1 1 B
+X DIO_14 20 100 -2300 100 R 40 40 1 1 B
+X DIO_15 21 100 -2400 100 R 40 40 1 1 B
+X VDDS3 22 100 -400 100 R 40 40 1 1 W
+X DCOUPL 23 1800 -600 100 L 40 40 1 1 W
+X JTAG_TMSC 24 1800 -1500 100 L 40 40 1 1 B
+X JTAG_TCKC 25 1800 -1400 100 L 40 40 1 1 I
+X DIO_16 26 100 -2500 100 R 40 40 1 1 B
+X DIO_17 27 100 -2600 100 R 40 40 1 1 B
+X DIO_18 28 100 -2700 100 R 40 40 1 1 B
+X DIO_19 29 100 -2800 100 R 40 40 1 1 B
+X X32K_Q1 3 1800 -800 100 L 40 40 1 1 P
+X DIO_20 30 100 -2900 100 R 40 40 1 1 B
+X DIO_21 31 100 -3000 100 R 40 40 1 1 B
+X DIO_22 32 100 -3100 100 R 40 40 1 1 B
+X DCDC_SW 33 1800 -400 100 L 40 40 1 1 W
+X VDDS_DCDC 34 100 -500 100 R 40 40 1 1 W
+X ~RESET~ 35 100 -700 100 R 40 40 1 1 I
+X DIO_23 36 100 -3200 100 R 40 40 1 1 B
+X DIO_24 37 100 -3300 100 R 40 40 1 1 B
+X DIO_25 38 100 -3400 100 R 40 40 1 1 B
+X DIO_26 39 100 -3500 100 R 40 40 1 1 B
+X X32K_Q2 4 1800 -900 100 L 40 40 1 1 P
+X DIO_27 40 100 -3600 100 R 40 40 1 1 B
+X DIO_28 41 100 -3700 100 R 40 40 1 1 B
+X DIO_29 42 100 -3800 100 R 40 40 1 1 B
+X DIO_30 43 100 -3900 100 R 40 40 1 1 B
+X VDDS 44 100 -200 100 R 40 40 1 1 W
+X VDDR 45 100 0 100 R 40 40 1 1 W
+X X48M_N 46 1800 -1100 100 L 40 40 1 1 P
+X X48M_P 47 1800 -1200 100 L 40 40 1 1 P
+X VDDR_RF 48 100 -100 100 R 40 40 1 1 W
+X EP 49 1800 -3900 100 L 40 40 1 1 W
+X DIO_0 5 100 -900 100 R 40 40 1 1 B
+X DIO_1 6 100 -1000 100 R 40 40 1 1 B
+X DIO_2 7 100 -1100 100 R 40 40 1 1 B
+X DIO_3 8 100 -1200 100 R 40 40 1 1 B
+X DIO_4 9 100 -1300 100 R 40 40 1 1 B
+ENDDRAW
+ENDDEF
+#
+# cc2652_ti_VDDR
+#
+DEF cc2652_ti_VDDR #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "cc2652_ti_VDDR" 0 150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X VDDR 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# cc2652_ti_VDDS
+#
+DEF cc2652_ti_VDDS #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "cc2652_ti_VDDS" 0 150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X VDDS 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_GND
+#
+DEF power_GND #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -250 50 H I C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
+X GND 1 0 0 0 D 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_VDD
+#
+DEF power_VDD #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_VDD" 0 150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X VDD 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# pspice_CAP
+#
+DEF pspice_CAP C 0 10 Y Y 1 F N
+F0 "C" 100 150 50 V V C CNN
+F1 "pspice_CAP" 100 -150 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+ALIAS C
+DRAW
+P 2 0 1 0 -150 -50 150 -50 N
+P 2 0 1 0 -150 50 150 50 N
+X ~ 1 0 250 200 D 40 40 1 1 P
+X ~ 2 0 -250 200 U 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
+#End Library

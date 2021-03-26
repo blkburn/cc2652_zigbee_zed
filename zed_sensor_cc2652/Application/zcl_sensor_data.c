@@ -53,7 +53,7 @@
  * CONSTANTS
  */
 
-#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021)
+#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021) || defined(SENSOR_LTR390)
 #define SENSOR_DEVICE_VERSION     0
 #define SENSOR_FLAGS              0
 
@@ -66,6 +66,8 @@
 #define HUMIDITYSENSOR_MAX_MEASURED_VALUE  10000  // 100%
 #define HUMIDITYSENSOR_MIN_MEASURED_VALUE  00000  // 0%
 
+#define ILLUMINANCESENSOR_MAX_MEASURED_VALUE  500000  // 100%
+#define ILLUMINANCESENSOR_MIN_MEASURED_VALUE  00000  // 0%
 #endif
 
 /*********************************************************************
@@ -97,6 +99,9 @@ const uint8_t zclSensor_ModelId[] = { 8, 'S','A','-','A','H','T','1','0' };
 #ifdef SENSOR_SI7021
 const uint8_t zclSensor_ModelId[] = { 9, 'S','A','-','S','I','7','0','2','1' };
 #endif
+#ifdef SENSOR_LTR390
+const uint8_t zclSensor_ModelId[] = { 9, 'S','A','-','L','T','R','3','9','0' };
+#endif
 const uint8_t zclSensor_PowerSource = POWER_SOURCE_BATTERY;
 uint8_t zclSensor_PhysicalEnvironment = PHY_UNSPECIFIED_ENV;
 
@@ -108,12 +113,19 @@ uint16_t zclSensor_IdentifyTime;
 // Temperature Sensor Cluster
 int16_t zclTemperatureSensor_MeasuredValue = TEMPERATURESENSOR_MIN_MEASURED_VALUE;
 const int16_t zclTemperatureSensor_MinMeasuredValue = TEMPERATURESENSOR_MIN_MEASURED_VALUE;
-const uint16_t zclTemperatureSensor_MaxMeasuredValue = TEMPERATURESENSOR_MAX_MEASURED_VALUE;
+const int16_t zclTemperatureSensor_MaxMeasuredValue = TEMPERATURESENSOR_MAX_MEASURED_VALUE;
 
 // Humidity Sensor Cluster
-int16_t zclHumiditySensor_MeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
-const int16_t zclHumiditySensor_MinMeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
+uint16_t zclHumiditySensor_MeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
+const uint16_t zclHumiditySensor_MinMeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
 const uint16_t zclHumiditySensor_MaxMeasuredValue = HUMIDITYSENSOR_MAX_MEASURED_VALUE;
+
+#elif defined(SENSOR_LTR390)
+
+// Illuminance Sensor Cluster
+uint16_t zclIlluminanceSensor_MeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
+const uint16_t zclIlluminanceSensor_MinMeasuredValue = ILLUMINANCESENSOR_MIN_MEASURED_VALUE;
+const uint16_t zclIlluminanceSensor_MaxMeasuredValue = ILLUMINANCESENSOR_MAX_MEASURED_VALUE;
 
 #endif
 

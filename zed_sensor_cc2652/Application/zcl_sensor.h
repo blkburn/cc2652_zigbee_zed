@@ -97,7 +97,7 @@ extern uint16_t zclSensor_IdentifyTime;
 // Temperature Measurement Cluster
 extern int16_t zclTemperatureSensor_MeasuredValue;
 extern const int16_t zclTemperatureSensor_MinMeasuredValue;
-extern const uint16_t zclTemperatureSensor_MaxMeasuredValue;
+extern const int16_t zclTemperatureSensor_MaxMeasuredValue;
 
 // Humidity Sensor Cluster
 extern uint16_t zclHumiditySensor_MeasuredValue;
@@ -106,7 +106,7 @@ extern const uint16_t zclHumiditySensor_MaxMeasuredValue;
 
 // Illuminance Sensor Cluster
 extern uint16_t zclIlluminanceSensor_MeasuredValue;
-extern const int16_t zclIlluminanceSensor_MinMeasuredValue;
+extern const uint16_t zclIlluminanceSensor_MinMeasuredValue;
 extern const uint16_t zclIlluminanceSensor_MaxMeasuredValue;
 
 extern uint8_t zclBatterySensor_MeasuredValue;

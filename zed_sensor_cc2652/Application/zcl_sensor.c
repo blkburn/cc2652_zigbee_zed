@@ -117,6 +117,8 @@
 /* Driver configuration */
 #include "ti_drivers_config.h"
 
+#include "math.h"
+
 /*********************************************************************
  * MACROS
  */
@@ -428,6 +430,9 @@ void sensorApp_task()
             }
 #elif defined(SENSOR_LTR390)
             uint32_t calc;
+            calc = ((output.byte3 & 0x0F) << 16) | (output.byte2 << 8) | output.byte1; // | (output.byte3 >> 4);
+            calc /=  5;
+            calc = log10(calc) * 10000;
             zclIlluminanceSensor_MeasuredValue = calc;
 
 

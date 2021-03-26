@@ -288,6 +288,35 @@ CONST zclAttrRec_t zclSensor_Attrs[] =
       (void *)&zclSensor_humidity_clusterRevision
     }
   },
+#elif defined(SENSOR_LTR390)
+  {
+    ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT,
+    { // Attribute record
+      ATTRID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE,
+      ZCL_DATATYPE_UINT16,
+      ACCESS_CONTROL_READ | ACCESS_REPORTABLE,
+      (void *)&zclIlluminanceSensor_MeasuredValue
+    }
+  },
+  {
+    ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT,
+    { // Attribute record
+      ATTRID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE,
+      ZCL_DATATYPE_UINT16,
+      ACCESS_CONTROL_READ,
+      (void *)&zclIlluminanceSensor_MinMeasuredValue
+    }
+  },
+  {
+    ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT,
+    { // Attribute record
+      ATTRID_ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE,
+      ZCL_DATATYPE_UINT16,
+      ACCESS_CONTROL_READ,
+      (void *)&zclIlluminanceSensor_MaxMeasuredValue
+    }
+  },
+
 #endif
 // power config - report battery level
   {
@@ -337,6 +366,18 @@ const cId_t zclSensor_InClusterList[ZCLSENSOR_MAX_INCLUSTERS] =
   ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY,
   ZCL_CLUSTER_ID_GENERAL_POWER_CFG
 };
+#elif defined(SENSOR_LTR390)
+
+#define ZCLSENSOR_MAX_INCLUSTERS       4
+const cId_t zclSensor_InClusterList[ZCLSENSOR_MAX_INCLUSTERS] =
+{
+  ZCL_CLUSTER_ID_GENERAL_BASIC,
+  ZCL_CLUSTER_ID_GENERAL_IDENTIFY,
+  ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT,
+  ZCL_CLUSTER_ID_GENERAL_POWER_CFG
+};
+#elif defined(SENSOR_LTR390)
+
 #endif
 
 #define ZCLSENSOR_MAX_OUTCLUSTERS       1

@@ -108,6 +108,8 @@
 #include <Application/sensor_controller/AHT10/scif.h>
 #elif defined(SENSOR_SI7021)
 #include <Application/sensor_controller/SI7021/scif.h>
+#elif defined(SENSOR_LTR390)
+#include <Application/sensor_controller/LTR390/scif.h>
 #endif
 
 /* Driver Header files */
@@ -141,6 +143,9 @@ SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_OUTPUT_T output;
 #elif defined(SENSOR_SI7021)
 int32_t prev_temp = 0;
 int32_t prev_hum = 0;
+SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_OUTPUT_T output;
+#elif defined(SENSOR_LTR390)
+int32_t prev_lux = 0;
 SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_OUTPUT_T output;
 #endif
 
@@ -345,7 +350,7 @@ void sensorApp_task()
     int16_t battery_loop = battery_check;
 
 
-#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021)
+#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021) || defined(SENSOR_LTR390)
     // Initialize the SCIF operating system abstraction layer
     scifOsalInit();
 //    scifOsalRegisterCtrlReadyCallback(scCtrlReadyCallback);
@@ -376,6 +381,8 @@ void sensorApp_task()
     // Start the "I2C Temp and Humidity Sensor" Sensor Controller task
     scifStartTasksNbl(1 << SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_TASK_ID);
 #elif defined(SENSOR_SI7021)
+    scifStartTasksNbl(1 << SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_TASK_ID);
+#elif defined(SENSOR_LTR390)
     scifStartTasksNbl(1 << SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_TASK_ID);
 #endif
 
@@ -419,6 +426,11 @@ void sensorApp_task()
                 zclTemperatureSensor_MeasuredValue = calc;
                 prev_temp = calc;
             }
+#elif defined(SENSOR_LTR390)
+            uint32_t calc;
+            zclIlluminanceSensor_MeasuredValue = calc;
+
+
 #endif
 
             // just report the raw battery values for testing
@@ -496,6 +508,14 @@ void scTaskAlertCallback(void) {
     Semaphore_post(appSensorSemHandle);
 
     scifAckAlertEvents();
+
+#elif defined(SENSOR_LTR390)
+    scifClearAlertIntSource();
+    output = scifTaskData.i2cTempAndHumiditySensor.output;
+    Semaphore_post(appSensorSemHandle);
+
+    scifAckAlertEvents();
+
 
 #endif
 
@@ -670,18 +690,19 @@ static void zclSensor_Init( void )
   OsalPort_memcpy(Req.reportableChange,reportableChange,BDBREPORTING_MAX_ANALOG_ATTR_SIZE);
   Zstackapi_bdbRepAddAttrCfgRecordDefaultToListReq(appServiceTaskId,&Req);
 
-//  Req.attrID = ATTRID_POWER_CONFIGURATION_BATTERY_VOLTAGE;
-//  Req.cluster = ZCL_CLUSTER_ID_GENERAL_POWER_CFG;
-//  Req.endpoint = SAMPLETEMPERATURESENSOR_ENDPOINT;
-//  Req.maxReportInt = 10;
-//  Req.minReportInt = 5;
-//  OsalPort_memcpy(Req.reportableChange,reportableChange,BDBREPORTING_MAX_ANALOG_ATTR_SIZE);
-//  Zstackapi_bdbRepAddAttrCfgRecordDefaultToListReq(appServiceTaskId,&Req);
-
-
   /// setup Humidity reporting
   Req.attrID = ATTRID_RELATIVITY_HUMIDITY_MEASURED_VALUE;
   Req.cluster = ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY;
+  Req.endpoint = SENSOR_ENDPOINT;
+  Req.maxReportInt = 60;
+  Req.minReportInt = 30;
+  OsalPort_memcpy(Req.reportableChange,reportableChange,BDBREPORTING_MAX_ANALOG_ATTR_SIZE);
+  Zstackapi_bdbRepAddAttrCfgRecordDefaultToListReq(appServiceTaskId,&Req);
+
+#elif defined(SENSOR_LTR390)
+
+  Req.attrID = ATTRID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE;
+  Req.cluster = ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT;
   Req.endpoint = SENSOR_ENDPOINT;
   Req.maxReportInt = 60;
   Req.minReportInt = 30;
@@ -1078,6 +1099,9 @@ static void zclSensor_processZStackMsgs(zstackmsg_genericReq_t *pMsg)
 
 #if defined(SENSOR_AHT10) || defined(SENSOR_SI7021)
                 uint16 clusterIds[] = {ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT, ZCL_CLUSTER_ID_GENERAL_POWER_CFG, ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY};
+#elif defined(SENSOR_LTR390)
+                uint16 clusterIds[] = {ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT, ZCL_CLUSTER_ID_GENERAL_POWER_CFG};
+
 #endif
                 zAddrType_t dstaddr;
                 OsalPort_memcpy(dstaddr.addr.extAddr, pInd->rsp.ieeeAddr, Z_EXTADDR_LEN);
@@ -1623,7 +1647,7 @@ static void zclSensor_processKey(uint8_t key, Button_EventMask buttonEvents, uin
                     // Fill in the single attribute information for the temperature reading
                     pReportCmd->numAttr = 1;
                     pReportCmd->attrList[0].attrID = ATTRID_RELATIVITY_HUMIDITY_MEASURED_VALUE;
-                    pReportCmd->attrList[0].dataType = ZCL_DATATYPE_INT16;
+                    pReportCmd->attrList[0].dataType = ZCL_DATATYPE_UINT16;
                     pReportCmd->attrList[0].attrData = (void *)&zclHumiditySensor_MeasuredValue;// (uint8 *)&(zclSampleTemperatureSensor_MeasuredValue);
 
                     afAddrType_t dstaddr;
@@ -1638,6 +1662,32 @@ static void zclSensor_processKey(uint8_t key, Button_EventMask buttonEvents, uin
                     free(pReportCmd);
                 }
                 LED_startBlinking(gGreenLedHandle, 250, 2);
+#elif defined(SENSOR_LTR390)
+                zclReportCmd_t *pReportCmd;
+                pReportCmd = malloc( sizeof(zclReportCmd_t) + sizeof(zclReport_t) );
+                if(pReportCmd != NULL)
+                {
+                    // Fill in the single attribute information for the temperature reading
+                    pReportCmd->numAttr = 1;
+                    pReportCmd->attrList[0].attrID = ATTRID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE;
+                    pReportCmd->attrList[0].dataType = ZCL_DATATYPE_UINT16;
+                    pReportCmd->attrList[0].attrData = (void *)&zclIlluminanceSensor_MeasuredValue;// (uint8 *)&(zclSampleTemperatureSensor_MeasuredValue);
+
+                    afAddrType_t dstaddr;
+                    dstaddr.addr.shortAddr = 0x0000;
+                    dstaddr.addrMode = afAddr16Bit;
+                    dstaddr.endPoint = 1;
+                    dstaddr.panId = 0;
+
+                    // Call ZCL function to send the report
+                    zcl_SendReportCmd(8, &dstaddr, ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT, pReportCmd, ZCL_FRAME_SERVER_CLIENT_DIR, 1, 0 );
+
+                    free(pReportCmd);
+                }
+
+                LED_startBlinking(gGreenLedHandle, 250, 2);
+
+
 #endif
             } else {
                 LED_startBlinking(gGreenLedHandle, 100, 5);

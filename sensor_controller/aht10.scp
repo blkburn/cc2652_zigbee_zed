@@ -8,7 +8,7 @@
     <pattr name="Chip revision">E</pattr>
     <pattr name="Clock in active mode">0</pattr>
     <pattr name="Code prefix"></pattr>
-    <pattr name="Default power mode">0</pattr>
+    <pattr name="Default power mode">1</pattr>
     <pattr name="Operating system">TI-RTOS</pattr>
     <pattr name="Output directory">./aht10_src</pattr>
     <pattr name="RTC tick interval (16.16 format)">2000</pattr>
@@ -76,7 +76,7 @@
         </resource_ref>
         <resource_ref name="Digital Open-Drain Pins" enabled="0"/>
         <resource_ref name="Digital Open-Source Pins" enabled="0"/>
-        <resource_ref name="Digital Output Pins" enabled="1">
+        <resource_ref name="Digital Output Pins" enabled="0">
             <io_usage name="LED" label="toggle led on sensor read">
                 <uattr name="Configuration on uninitialization">-1</uattr>
                 <uattr name="Output drive strength">0</uattr>
@@ -119,7 +119,7 @@
         <resource_ref name="Dynamic Power Control" enabled="0"/>
         <resource_ref name="GPIO Event Trigger" enabled="0"/>
         <resource_ref name="I2C Master" enabled="1">
-            <rattr name="SCL frequency">1</rattr>
+            <rattr name="SCL frequency">0</rattr>
             <rattr name="SCL stretch timeout">10000</rattr>
             <io_usage>
                 <uattr name="SCL pin/0000">DIO4</uattr>

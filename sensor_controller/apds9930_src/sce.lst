@@ -379,7 +379,7 @@
                pFwTaskInitializeFuncTable:
 009f ---- 00b2                         dw          #i2cTempAndHumiditySensor/initialize
                pFwTaskExecuteFuncTable:
-00a0 ---- 00e0                         dw          #i2cTempAndHumiditySensor/execute
+00a0 ---- 00e2                         dw          #i2cTempAndHumiditySensor/execute
                pFwTaskTerminateFuncTable:
 00a1 ---- 011e                         dw          #i2cTempAndHumiditySensor/terminate
 
@@ -439,11 +439,11 @@
 00b2 ---- 5080                         ld          R5, #128
 00b3 ---- 4000                         ld          R4, #0
 00b4 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00b5 ---- 70b9                         ld          R7, #/id0132
+00b5 ---- 70b9                         ld          R7, #/id0117
 00b6 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
 00b7 ---- 7072                         ld          R7, #(114 | 0)
 00b8 ---- 0523                         jmp         I2cDeviceWriteReg8
-               /id0132:
+               /id0117:
 00b9 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
 00ba ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
                ;?
@@ -452,11 +452,11 @@
 00bb ---- 5081                         ld          R5, #129
 00bc ---- 40c0                         ld          R4, #192
 00bd ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00be ---- 70c2                         ld          R7, #/id0138
+00be ---- 70c2                         ld          R7, #/id0123
 00bf ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
 00c0 ---- 7072                         ld          R7, #(114 | 0)
 00c1 ---- 0523                         jmp         I2cDeviceWriteReg8
-               /id0138:
+               /id0123:
 00c2 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
 00c3 ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
                ;?
@@ -465,11 +465,11 @@
 00c4 ---- 5082                         ld          R5, #130
 00c5 ---- 40ff                         ld          R4, #255
 00c6 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00c7 ---- 70cb                         ld          R7, #/id0144
+00c7 ---- 70cb                         ld          R7, #/id0129
 00c8 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
 00c9 ---- 7072                         ld          R7, #(114 | 0)
 00ca ---- 0523                         jmp         I2cDeviceWriteReg8
-               /id0144:
+               /id0129:
 00cb ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
 00cc ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
                ;?
@@ -478,11 +478,11 @@
 00cd ---- 5083                         ld          R5, #131
 00ce ---- 40ff                         ld          R4, #255
 00cf ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00d0 ---- 70d4                         ld          R7, #/id0150
+00d0 ---- 70d4                         ld          R7, #/id0135
 00d1 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
 00d2 ---- 7072                         ld          R7, #(114 | 0)
 00d3 ---- 0523                         jmp         I2cDeviceWriteReg8
-               /id0150:
+               /id0135:
 00d4 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
 00d5 ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
                ;?
@@ -495,15 +495,19 @@
 00d6 ---- 508f                         ld          R5, #143
 00d7 ---- 4000                         ld          R4, #0
 00d8 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00d9 ---- 70dd                         ld          R7, #/id0156
+00d9 ---- 70dd                         ld          R7, #/id0141
 00da ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
 00db ---- 7072                         ld          R7, #(114 | 0)
 00dc ---- 0523                         jmp         I2cDeviceWriteReg8
-               /id0156:
+               /id0141:
 00dd ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
 00de ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+               ;?
+               ;? fwScheduleTask(1);
+00df ---- 0001                         ld          R0, #1
+00e0 ---- 0c9e                         st          R0, [#(pFwTaskExecuteScheduleTable + 0)]
                i2cTempAndHumiditySensor/initializeDone:
-00df ---- adb7                         rts
+00e1 ---- adb7                         rts
 
 
 
@@ -511,90 +515,88 @@
                i2cTempAndHumiditySensor/execute:
                ;? U16 status;
                ;?
-               ;? gpioSetOutput(AUXIO_O_LED);
-00e0 ---- 74bb                         iobset      #(12 & 0x7), [#(IOP_AIODIO0_GPIODOUT + (12 >> 3))]
+               ;? //gpioSetOutput(AUXIO_O_LED);
                ;?
                ;? // enable device
                ;? // sleep after interrupt
                ;? // ALS enable
                ;? // Power ON
                ;? i2cDeviceWriteReg8(I2C_ADDR, CMD | ENABLE, 0x43);
-00e1 ---- 5080                         ld          R5, #128
-00e2 ---- 4043                         ld          R4, #67
-00e3 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00e4 ---- 70e8                         ld          R7, #/id0163
-00e5 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
-00e6 ---- 7072                         ld          R7, #(114 | 0)
-00e7 ---- 0523                         jmp         I2cDeviceWriteReg8
-               /id0163:
-00e8 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
-00e9 ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+00e2 ---- 5080                         ld          R5, #128
+00e3 ---- 4043                         ld          R4, #67
+00e4 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+00e5 ---- 70e9                         ld          R7, #/id0149
+00e6 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
+00e7 ---- 7072                         ld          R7, #(114 | 0)
+00e8 ---- 0523                         jmp         I2cDeviceWriteReg8
+               /id0149:
+00e9 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
+00ea ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
                ;?
                ;? fwDelayUs(15000);
-00ea 863a 0298                         ld          R0, #15000
-00ec ---- 8801                         add         R0, #1
-00ed ---- 8b49                         out         R0, [#IOP_EVCTL_PROGDLY]
-00ee ---- 8db1                         wev1        #WEVSEL_PROG_DLY
+00eb 863a 0298                         ld          R0, #15000
+00ed ---- 8801                         add         R0, #1
+00ee ---- 8b49                         out         R0, [#IOP_EVCTL_PROGDLY]
+00ef ---- 8db1                         wev1        #WEVSEL_PROG_DLY
                ;?
                ;? i2cDeviceReadReg8(I2C_ADDR, CMD | STATUS; output.status);
-00ef ---- 5093                         ld          R5, #147
-00f0 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00f1 ---- 70f5                         ld          R7, #/id0170
-00f2 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
-00f3 ---- 7072                         ld          R7, #(114 | 0)
-00f4 ---- 0575                         jmp         I2cDeviceReadReg8
-               /id0170:
-00f5 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
-00f6 ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00f7 ---- 7cb0                         st          R7, [#i2cTempAndHumiditySensor/output/status]
+00f0 ---- 5093                         ld          R5, #147
+00f1 ---- 68b1                         ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+00f2 ---- 70f6                         ld          R7, #/id0156
+00f3 ---- 7d22                         st          R7, [#i2cDeviceCommonReturn]
+00f4 ---- 7072                         ld          R7, #(114 | 0)
+00f5 ---- 0575                         jmp         I2cDeviceReadReg8
+               /id0156:
+00f6 ---- 091f                         ld          R0, [#i2cDeviceCommonBackupR0]
+00f7 ---- 6cb1                         st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+00f8 ---- 7cb0                         st          R7, [#i2cTempAndHumiditySensor/output/status]
                ;? status = output.status & 0x01;
-00f8 ---- 08b0                         ld          R0, [#i2cTempAndHumiditySensor/output/status]
-00f9 ---- 8001                         and         R0, #1
+00f9 ---- 08b0                         ld          R0, [#i2cTempAndHumiditySensor/output/status]
+00fa ---- 8001                         and         R0, #1
                ;?
                ;? if (status == 0x01) {
-00fa ---- 8a01                         cmp         R0, #1
-00fb ---- be1b                         bneq        /id0177
+00fb ---- 8a01                         cmp         R0, #1
+00fc ---- be1b                         bneq        /id0163
                ;?
                ;?     i2cDeviceReadReg16LsbFirst(I2C_ADDR, (CMD | AUTO_INC) | CH0DATA; output.ch0data);
-00fc ---- 50b4                             ld          R5, #180
-00fd ---- 68b1                             ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-00fe ---- 7102                             ld          R7, #/id0179
-00ff ---- 7d22                             st          R7, [#i2cDeviceCommonReturn]
-0100 ---- 7072                             ld          R7, #(114 | 0)
-0101 ---- 05a6                             jmp         I2cDeviceReadReg16LsbFirst
-               /id0179:
-0102 ---- 091f                             ld          R0, [#i2cDeviceCommonBackupR0]
-0103 ---- 6cb1                             st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-0104 ---- 7cae                             st          R7, [#i2cTempAndHumiditySensor/output/ch0data]
+00fd ---- 50b4                             ld          R5, #180
+00fe ---- 68b1                             ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+00ff ---- 7103                             ld          R7, #/id0165
+0100 ---- 7d22                             st          R7, [#i2cDeviceCommonReturn]
+0101 ---- 7072                             ld          R7, #(114 | 0)
+0102 ---- 05a6                             jmp         I2cDeviceReadReg16LsbFirst
+               /id0165:
+0103 ---- 091f                             ld          R0, [#i2cDeviceCommonBackupR0]
+0104 ---- 6cb1                             st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+0105 ---- 7cae                             st          R7, [#i2cTempAndHumiditySensor/output/ch0data]
                ;?     i2cDeviceReadReg16LsbFirst(I2C_ADDR, (CMD | AUTO_INC) | CH1DATA; output.ch1data);
-0105 ---- 50b6                             ld          R5, #182
-0106 ---- 68b1                             ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-0107 ---- 710b                             ld          R7, #/id0185
-0108 ---- 7d22                             st          R7, [#i2cDeviceCommonReturn]
-0109 ---- 7072                             ld          R7, #(114 | 0)
-010a ---- 05a6                             jmp         I2cDeviceReadReg16LsbFirst
-               /id0185:
-010b ---- 091f                             ld          R0, [#i2cDeviceCommonBackupR0]
-010c ---- 6cb1                             st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-010d ---- 7caf                             st          R7, [#i2cTempAndHumiditySensor/output/ch1data]
+0106 ---- 50b6                             ld          R5, #182
+0107 ---- 68b1                             ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+0108 ---- 710c                             ld          R7, #/id0171
+0109 ---- 7d22                             st          R7, [#i2cDeviceCommonReturn]
+010a ---- 7072                             ld          R7, #(114 | 0)
+010b ---- 05a6                             jmp         I2cDeviceReadReg16LsbFirst
+               /id0171:
+010c ---- 091f                             ld          R0, [#i2cDeviceCommonBackupR0]
+010d ---- 6cb1                             st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+010e ---- 7caf                             st          R7, [#i2cTempAndHumiditySensor/output/ch1data]
                ;?
                ;?     // disable - sleep
                ;?     i2cDeviceWriteReg8(I2C_ADDR, CMD | ENABLE, 0x00);
-010e ---- 5080                             ld          R5, #128
-010f ---- 4000                             ld          R4, #0
-0110 ---- 68b1                             ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-0111 ---- 7115                             ld          R7, #/id0191
-0112 ---- 7d22                             st          R7, [#i2cDeviceCommonReturn]
-0113 ---- 7072                             ld          R7, #(114 | 0)
-0114 ---- 0523                             jmp         I2cDeviceWriteReg8
-               /id0191:
-0115 ---- 091f                             ld          R0, [#i2cDeviceCommonBackupR0]
-0116 ---- 6cb1                             st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
-               ;? }
+010f ---- 5080                             ld          R5, #128
+0110 ---- 4000                             ld          R4, #0
+0111 ---- 68b1                             ld          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+0112 ---- 7116                             ld          R7, #/id0177
+0113 ---- 7d22                             st          R7, [#i2cDeviceCommonReturn]
+0114 ---- 7072                             ld          R7, #(114 | 0)
+0115 ---- 0523                             jmp         I2cDeviceWriteReg8
                /id0177:
+0116 ---- 091f                             ld          R0, [#i2cDeviceCommonBackupR0]
+0117 ---- 6cb1                             st          R6, [#i2cTempAndHumiditySensor/state/i2cStatus]
+               ;? }
+               /id0163:
                ;?
-               ;? gpioClearOutput(AUXIO_O_LED);
-0117 ---- 54bb                         iobclr      #(12 & 0x7), [#(IOP_AIODIO0_GPIODOUT + (12 >> 3))]
+               ;? //gpioClearOutput(AUXIO_O_LED);
                ;?
                ;? fwGenAlertInterrupt();
 0118 ---- 08a4                         ld          R0, [#fwCtrlInt/bvTaskIoAlert]
@@ -1073,4 +1075,4 @@
                .segment end "Procedure Library"
 
 
-; Generated by DESKTOP-MMLJVDE at 2021-03-29 21:16:02.407
+; Generated by DESKTOP-MMLJVDE at 2021-03-29 21:49:47.177

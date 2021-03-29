@@ -84,7 +84,7 @@
         </resource_ref>
         <resource_ref name="Digital Open-Drain Pins" enabled="0"/>
         <resource_ref name="Digital Open-Source Pins" enabled="0"/>
-        <resource_ref name="Digital Output Pins" enabled="1">
+        <resource_ref name="Digital Output Pins" enabled="0">
             <io_usage name="LED" label="toggle led on sensor read">
                 <uattr name="Configuration on uninitialization">-1</uattr>
                 <uattr name="Output drive strength">0</uattr>
@@ -226,7 +226,7 @@
         <sccode name="event3" init_power_mode="0"><![CDATA[]]></sccode>
         <sccode name="execute" init_power_mode="0"><![CDATA[U16 status;
 
-gpioSetOutput(AUXIO_O_LED);
+//gpioSetOutput(AUXIO_O_LED);
 
 // enable device
 // sleep after interrupt
@@ -248,7 +248,7 @@ if (status == 0x01) {
     i2cDeviceWriteReg8(I2C_ADDR, CMD | ENABLE, 0x00);
 }
 
-gpioClearOutput(AUXIO_O_LED);
+//gpioClearOutput(AUXIO_O_LED);
 
 fwGenAlertInterrupt();
 fwScheduleTask(1);]]></sccode>
@@ -272,7 +272,9 @@ i2cDeviceWriteReg8(I2C_ADDR, CMD | WTIME, 0xFF);
 
 
 // default APDS9930_CONTROL
-i2cDeviceWriteReg8(I2C_ADDR, CMD | CONTROL, 0x00);]]></sccode>
+i2cDeviceWriteReg8(I2C_ADDR, CMD | CONTROL, 0x00);
+
+fwScheduleTask(1);]]></sccode>
         <sccode name="terminate" init_power_mode="0"><![CDATA[]]></sccode>
         <event_trigger active_count="2">0,0,2,3</event_trigger>
         <tt_iter>run_execute,wait_100ms</tt_iter>

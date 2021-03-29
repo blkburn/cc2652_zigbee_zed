@@ -28,7 +28,7 @@ See the header in the application source file ("main.c" or similar) for further 
     <pattr name="Chip name">CC2652R1F</pattr>
     <pattr name="Chip package">QFN48 7x7 RGZ</pattr>
     <pattr name="Chip revision">E</pattr>
-    <pattr name="Clock in active mode">1</pattr>
+    <pattr name="Clock in active mode">0</pattr>
     <pattr name="Code prefix"></pattr>
     <pattr name="Default power mode">1</pattr>
     <pattr name="Operating system">TI-RTOS</pattr>
@@ -154,7 +154,7 @@ It is possible to trigger the error conditions on purpose:
         <resource_ref name="Dynamic Power Control" enabled="0"/>
         <resource_ref name="GPIO Event Trigger" enabled="0"/>
         <resource_ref name="I2C Master" enabled="1">
-            <rattr name="SCL frequency">1</rattr>
+            <rattr name="SCL frequency">0</rattr>
             <rattr name="SCL stretch timeout">10000</rattr>
             <io_usage>
                 <uattr name="SCL pin/0000">DIO4</uattr>
@@ -361,7 +361,7 @@ rtlLogStructs(BV_RTL_LOG_OUTPUT);]]></sccode>
         <sccode name="event1" init_power_mode="0"><![CDATA[]]></sccode>
         <sccode name="event2" init_power_mode="0"><![CDATA[]]></sccode>
         <sccode name="event3" init_power_mode="0"><![CDATA[]]></sccode>
-        <sccode name="execute" init_power_mode="2"><![CDATA[//gpioSetOutput(AUXIO_O_LED);
+        <sccode name="execute" init_power_mode="0"><![CDATA[//gpioSetOutput(AUXIO_O_LED);
 
 i2cDeviceReadReg16MsbFirst(SI7021_I2C_ADDR, 0xE5; output.hum);
 i2cDeviceReadReg16MsbFirst(SI7021_I2C_ADDR, 0xE0; output.temp);
@@ -370,12 +370,12 @@ i2cDeviceReadReg16MsbFirst(SI7021_I2C_ADDR, 0xE0; output.temp);
 
 fwGenAlertInterrupt();
 fwScheduleTask(1);]]></sccode>
-        <sccode name="initialize" init_power_mode="2"><![CDATA[i2cDeviceWriteReg8(SI7021_I2C_ADDR, 0xE6, 0xBB);
+        <sccode name="initialize" init_power_mode="0"><![CDATA[i2cDeviceWriteReg8(SI7021_I2C_ADDR, 0xE6, 0xBB);
 
 //gpioCfgMode(AUXIO_O_LED,GPIO_MODE_OUTPUT);
 //gpioClearOutput(AUXIO_O_LED);
 fwScheduleTask(1);]]></sccode>
-        <sccode name="terminate" init_power_mode="2"><![CDATA[// Perform soft reset
+        <sccode name="terminate" init_power_mode="0"><![CDATA[// Perform soft reset
 //i2cDeviceWriteReg8(HDC_I2C_ADDR, HDC_REG_CFG_RES_INT_AMM, BV_HDC_CFG_RES_SOFT_RESET);
 
 // Cancel the potentially active event triggers

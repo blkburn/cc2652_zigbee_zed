@@ -30,7 +30,7 @@ See the header in the application source file ("main.c" or similar) for further 
     <pattr name="Chip revision">E</pattr>
     <pattr name="Clock in active mode">0</pattr>
     <pattr name="Code prefix"></pattr>
-    <pattr name="Default power mode">0</pattr>
+    <pattr name="Default power mode">1</pattr>
     <pattr name="Operating system">TI-RTOS</pattr>
     <pattr name="Output directory">./ltr390_src</pattr>
     <pattr name="RTC tick interval (16.16 format)">2000</pattr>

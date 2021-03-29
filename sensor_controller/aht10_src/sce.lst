@@ -12,7 +12,7 @@
                ; Resource-specified definitions, if any
                .define AUXIO_I2C_SCL           14
                .define AUXIO_I2C_SDA           13
-               .define I2C_BASE_DELAY          55
+               .define I2C_BASE_DELAY          9
                .define I2C_EXT_DELAY           4
                .define I2C_STRETCH_TIMEOUT_US  10000
                .define I2C_WAIT_STRETCH_DELAY  5
@@ -594,7 +594,7 @@
                ;     R5
                I2cRepeatedStart:
                                        ; Wait T_LOW (SDA is already pull-up)
-0113 ---- 53c6                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
+0113 ---- 53f4                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
 0114 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SCL = pull-up
@@ -604,14 +604,14 @@
 0116 ---- 1521                         jsr         I2cWaitSclStretch
 
                                        ; Wait T_SU_STA
-0117 ---- 53c6                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
+0117 ---- 53f4                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
 0118 ---- 151e                         jsr         I2cWaitDelay
                I2cStart:
                                        ; SDA = driven low
 0119 ---- 55bb                         iobclr      #(AUXIO_I2C_SDA & 0x7), [#(IOP_AIODIO0_GPIODOUT + (AUXIO_I2C_SDA >> 3))]
 
                                        ; Wait T_HD_STA
-011a ---- 53ca                         ld          R5, #-((I2C_BASE_DELAY) - (1))
+011a ---- 53f8                         ld          R5, #-((I2C_BASE_DELAY) - (1))
 011b ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SCL = driven low
@@ -705,7 +705,7 @@
 013b ---- fd47                             nop
                /dataSdaDone:
                                            ; Wait T_LOW
-013c ---- 53cc                             ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (7))
+013c ---- 53fa                             ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (7))
 013d ---- 151e                             jsr         I2cWaitDelay
 
                                            ; SCL = pull-up
@@ -715,7 +715,7 @@
 013f ---- 1521                             jsr         I2cWaitSclStretch
 
                                            ; Wait T_HIGH
-0140 ---- 53cf                             ld          R5, #-(I2C_BASE_DELAY - (I2C_WAIT_STRETCH_DELAY + 1))
+0140 ---- 53fd                             ld          R5, #-(I2C_BASE_DELAY - (I2C_WAIT_STRETCH_DELAY + 1))
 0141 ---- 151e                             jsr         I2cWaitDelay
 
                                            ; SCL = driven low
@@ -727,7 +727,7 @@
 0143 ---- 75bb                         iobset      #(AUXIO_I2C_SDA & 0x7), [#(IOP_AIODIO0_GPIODOUT + (AUXIO_I2C_SDA >> 3))]
 
                                        ; Wait T_LOW
-0144 ---- 53c6                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
+0144 ---- 53f4                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
 0145 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SCL = pull-up
@@ -737,7 +737,7 @@
 0147 ---- 1521                         jsr         I2cWaitSclStretch
 
                                        ; Wait T_HIGH
-0148 ---- 53cc                         ld          R5, #-((I2C_BASE_DELAY) - (3))
+0148 ---- 53fa                         ld          R5, #-((I2C_BASE_DELAY) - (3))
 0149 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; Read and store the SDA value in the status word
@@ -762,7 +762,7 @@
 014f ---- 55bb                         iobclr      #(AUXIO_I2C_SDA & 0x7), [#(IOP_AIODIO0_GPIODOUT + (AUXIO_I2C_SDA >> 3))]
 
                                        ; Wait T_LOW
-0150 ---- 53c6                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
+0150 ---- 53f4                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (1))
 0151 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SCL = pull-up
@@ -772,14 +772,14 @@
 0153 ---- 1521                         jsr         I2cWaitSclStretch
 
                                        ; Wait T_SU_STO
-0154 ---- 53cf                         ld          R5, #-((I2C_BASE_DELAY) - (I2C_WAIT_STRETCH_DELAY + 1))
+0154 ---- 53fd                         ld          R5, #-((I2C_BASE_DELAY) - (I2C_WAIT_STRETCH_DELAY + 1))
 0155 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SDA = pull-up
 0156 ---- 75bb                         iobset      #(AUXIO_I2C_SDA & 0x7), [#(IOP_AIODIO0_GPIODOUT + (AUXIO_I2C_SDA >> 3))]
 
                                        ; Wait T_BUF
-0157 ---- 53c7                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (2))
+0157 ---- 53f5                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (2))
 0158 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; Done
@@ -811,7 +811,7 @@
 015d ---- 75bb                             iobset      #(AUXIO_I2C_SDA & 0x7), [#(IOP_AIODIO0_GPIODOUT + (AUXIO_I2C_SDA >> 3))]
 
                                            ; Wait T_LOW
-015e ---- 53c7                             ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (2))
+015e ---- 53f5                             ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (2))
 015f ---- 151e                             jsr         I2cWaitDelay
 
                                            ; SCL = pull-up
@@ -821,7 +821,7 @@
 0161 ---- 1521                             jsr         I2cWaitSclStretch
 
                                            ; Wait T_HIGH
-0162 ---- 53d1                             ld          R5, #-((I2C_BASE_DELAY) - (I2C_WAIT_STRETCH_DELAY + 3))
+0162 ---- 53ff                             ld          R5, #-((I2C_BASE_DELAY) - (I2C_WAIT_STRETCH_DELAY + 3))
 0163 ---- 151e                             jsr         I2cWaitDelay
 
                                            ; Read and store SDA
@@ -844,7 +844,7 @@
 016f ---- fd47                         nop
                /ackSdaDone:
                                        ; Wait T_LOW
-0170 ---- 53cb                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (6))
+0170 ---- 53f9                         ld          R5, #-((I2C_BASE_DELAY + I2C_EXT_DELAY) - (6))
 0171 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SCL = pull-up
@@ -854,7 +854,7 @@
 0173 ---- 1521                         jsr         I2cWaitSclStretch
 
                                        ; Wait T_HIGH
-0174 ---- 53cf                         ld          R5, #-((I2C_BASE_DELAY) - (I2C_WAIT_STRETCH_DELAY + 1))
+0174 ---- 53fd                         ld          R5, #-((I2C_BASE_DELAY) - (I2C_WAIT_STRETCH_DELAY + 1))
 0175 ---- 151e                         jsr         I2cWaitDelay
 
                                        ; SCL = driven low
@@ -869,4 +869,4 @@
                .segment end "Procedure Library"
 
 
-; Generated by DESKTOP-MMLJVDE at 2021-03-19 15:37:00.817
+; Generated by DESKTOP-MMLJVDE at 2021-03-29 21:49:54.186

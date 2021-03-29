@@ -53,7 +53,7 @@
  * CONSTANTS
  */
 
-#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021) || defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
+#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021) || defined(SENSOR_LTR390) || defined(SENSOR_APDS9930)
 #define SENSOR_DEVICE_VERSION     0
 #define SENSOR_FLAGS              0
 
@@ -102,8 +102,8 @@ const uint8_t zclSensor_ModelId[] = { 9, 'S','A','-','S','I','7','0','2','1' };
 #ifdef SENSOR_LTR390
 const uint8_t zclSensor_ModelId[] = { 9, 'S','A','-','L','T','R','3','9','0' };
 #endif
-#ifdef SENSOR_ADPS9930
-const uint8_t zclSensor_ModelId[] = { 11, 'S','A','-','A','D','P','S','9','9','3','0' };
+#ifdef SENSOR_APDS9930
+const uint8_t zclSensor_ModelId[] = { 11, 'S','A','-','A','P','D','S','9','9','3','0' };
 #endif
 const uint8_t zclSensor_PowerSource = POWER_SOURCE_BATTERY;
 uint8_t zclSensor_PhysicalEnvironment = PHY_UNSPECIFIED_ENV;
@@ -123,7 +123,7 @@ uint16_t zclHumiditySensor_MeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
 const uint16_t zclHumiditySensor_MinMeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
 const uint16_t zclHumiditySensor_MaxMeasuredValue = HUMIDITYSENSOR_MAX_MEASURED_VALUE;
 
-#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_APDS9930)
 
 // Illuminance Sensor Cluster
 uint16_t zclIlluminanceSensor_MeasuredValue = HUMIDITYSENSOR_MIN_MEASURED_VALUE;
@@ -303,7 +303,7 @@ CONST zclAttrRec_t zclSensor_Attrs[] =
       (void *)&zclSensor_humidity_clusterRevision
     }
   },
-#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_APDS9930)
   {
     ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT,
     { // Attribute record
@@ -381,7 +381,7 @@ const cId_t zclSensor_InClusterList[ZCLSENSOR_MAX_INCLUSTERS] =
   ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY,
   ZCL_CLUSTER_ID_GENERAL_POWER_CFG
 };
-#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_APDS9930)
 
 #define ZCLSENSOR_MAX_INCLUSTERS       4
 const cId_t zclSensor_InClusterList[ZCLSENSOR_MAX_INCLUSTERS] =

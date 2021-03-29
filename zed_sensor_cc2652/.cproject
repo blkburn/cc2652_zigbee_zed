@@ -120,7 +120,7 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DEFINE.349895534" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_SYMBOLS}"/>
-									<listOptionValue builtIn="false" value="SENSOR_ADPS9930"/>
+									<listOptionValue builtIn="false" value="SENSOR_APDS9930"/>
 									<listOptionValue builtIn="false" value="xSENSOR_AHT10"/>
 									<listOptionValue builtIn="false" value="xSENSOR_SI7021"/>
 									<listOptionValue builtIn="false" value="xSENSOR_LTR390"/>

@@ -3,7 +3,7 @@
     <desc><![CDATA[Digital Proximity and Ambient Light Sensor]]></desc>
     <pattr name="Apply default power mode">0</pattr>
     <pattr name="Board">CC1352R LaunchPad SensorTag Kit (LPSTK)</pattr>
-    <pattr name="Chip name">CC1352R1F3</pattr>
+    <pattr name="Chip name">CC2652R1F</pattr>
     <pattr name="Chip package">QFN48 7x7 RGZ</pattr>
     <pattr name="Chip revision">E</pattr>
     <pattr name="Clock in active mode">0</pattr>
@@ -259,7 +259,7 @@ fwScheduleTask(1);]]></sccode>
 i2cDeviceWriteReg8(I2C_ADDR, CMD | ENABLE, 0x00);
 
 // default APDS9930_ATIME
-i2cDeviceWriteReg8(I2C_ADDR, CMD | ATIME, 0xFF);
+i2cDeviceWriteReg8(I2C_ADDR, CMD | ATIME, 0xC0);
 
 // default APDS9930_PTIME
 i2cDeviceWriteReg8(I2C_ADDR, CMD | PTIME, 0xFF);
@@ -272,7 +272,7 @@ i2cDeviceWriteReg8(I2C_ADDR, CMD | WTIME, 0xFF);
 
 
 // default APDS9930_CONTROL
-i2cDeviceWriteReg8(I2C_ADDR, CMD | CONTROL, 0x20);]]></sccode>
+i2cDeviceWriteReg8(I2C_ADDR, CMD | CONTROL, 0x00);]]></sccode>
         <sccode name="terminate" init_power_mode="0"><![CDATA[]]></sccode>
         <event_trigger active_count="2">0,0,2,3</event_trigger>
         <tt_iter>run_execute,wait_100ms</tt_iter>

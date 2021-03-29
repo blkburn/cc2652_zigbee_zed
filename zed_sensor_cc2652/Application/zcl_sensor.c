@@ -110,6 +110,8 @@
 #include <Application/sensor_controller/SI7021/scif.h>
 #elif defined(SENSOR_LTR390)
 #include <Application/sensor_controller/LTR390/scif.h>
+#elif defined(SENSOR_ADPS9930)
+#include <Application/sensor_controller/ADPS9930/scif.h>
 #endif
 
 /* Driver Header files */
@@ -146,7 +148,7 @@ SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_OUTPUT_T output;
 int32_t prev_temp = 0;
 int32_t prev_hum = 0;
 SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_OUTPUT_T output;
-#elif defined(SENSOR_LTR390)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
 int32_t prev_lux = 0;
 SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_OUTPUT_T output;
 #endif
@@ -352,7 +354,7 @@ void sensorApp_task()
     int16_t battery_loop = battery_check;
 
 
-#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021) || defined(SENSOR_LTR390)
+#if defined(SENSOR_AHT10) || defined(SENSOR_SI7021) || defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
     // Initialize the SCIF operating system abstraction layer
     scifOsalInit();
 //    scifOsalRegisterCtrlReadyCallback(scCtrlReadyCallback);
@@ -386,7 +388,10 @@ void sensorApp_task()
     scifStartTasksNbl(1 << SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_TASK_ID);
 #elif defined(SENSOR_LTR390)
     scifStartTasksNbl(1 << SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_TASK_ID);
+#elif defined(SENSOR_ADPS9930)
+    scifStartTasksNbl(1 << SCIF_I2C_TEMP_AND_HUMIDITY_SENSOR_TASK_ID);
 #endif
+
 
     /* Forever loop */
     for(;;)
@@ -435,7 +440,16 @@ void sensorApp_task()
             calc = log10(calc) * 10000;
             zclIlluminanceSensor_MeasuredValue = calc;
 
-
+#elif defined(SENSOR_ADPS9930)
+            uint32_t calc1;
+            uint32_t calc2;
+            uint32_t iac;
+            uint32_t lpc;
+            calc1 = (output.ch0data << 10) - 1907 * (output.ch1data);
+            calc2 = 764 * (output.ch0data) - 1322 * (output.ch1data);
+            iac = (calc1 > calc2 ? calc1 : calc2) >> 10;
+            lpc = 9594;
+            zclIlluminanceSensor_MeasuredValue = log10( (iac * lpc) >> 16) * 10000;
 #endif
 
             // just report the raw battery values for testing
@@ -521,6 +535,12 @@ void scTaskAlertCallback(void) {
 
     scifAckAlertEvents();
 
+#elif defined(SENSOR_ADPS9930)
+    scifClearAlertIntSource();
+    output = scifTaskData.i2cTempAndHumiditySensor.output;
+    Semaphore_post(appSensorSemHandle);
+
+    scifAckAlertEvents();
 
 #endif
 
@@ -704,7 +724,7 @@ static void zclSensor_Init( void )
   OsalPort_memcpy(Req.reportableChange,reportableChange,BDBREPORTING_MAX_ANALOG_ATTR_SIZE);
   Zstackapi_bdbRepAddAttrCfgRecordDefaultToListReq(appServiceTaskId,&Req);
 
-#elif defined(SENSOR_LTR390)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
 
   Req.attrID = ATTRID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE;
   Req.cluster = ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT;
@@ -1104,7 +1124,7 @@ static void zclSensor_processZStackMsgs(zstackmsg_genericReq_t *pMsg)
 
 #if defined(SENSOR_AHT10) || defined(SENSOR_SI7021)
                 uint16 clusterIds[] = {ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT, ZCL_CLUSTER_ID_GENERAL_POWER_CFG, ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY};
-#elif defined(SENSOR_LTR390)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
                 uint16 clusterIds[] = {ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT, ZCL_CLUSTER_ID_GENERAL_POWER_CFG};
 
 #endif
@@ -1667,7 +1687,7 @@ static void zclSensor_processKey(uint8_t key, Button_EventMask buttonEvents, uin
                     free(pReportCmd);
                 }
                 LED_startBlinking(gGreenLedHandle, 250, 2);
-#elif defined(SENSOR_LTR390)
+#elif defined(SENSOR_LTR390) || defined(SENSOR_ADPS9930)
                 zclReportCmd_t *pReportCmd;
                 pReportCmd = malloc( sizeof(zclReportCmd_t) + sizeof(zclReport_t) );
                 if(pReportCmd != NULL)
